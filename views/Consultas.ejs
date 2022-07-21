@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa Julia Freight Services LLC</title>
+
+    <link href="css/Master.css" rel=" stylesheet">
+
+    <!-- <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css"> -->
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<!-- <link link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> -->
+
+ 
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand">SANTA JULIA FREIGHT SERVICES LLC</a>
+    </nav>
+
+
+    <% include ./static/sidebar %>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <br><br>
+                    <form action="/buscar" method="post"> <input type="number" placeholder="Semana" id="txtBuscar"
+                            name="txtBuscar">
+                        <button type="submit">Buscar</button>
+
+                    </form>
+                    <form action="/buscarTodo" method="post"><button type="submit">Todos los datos</button></form>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <!-- <th>id</th> -->
+                                <th># Trip</th>
+                                <th>Week</th>
+                                <th>username</th>
+                                <th>date</th>
+                                <th>bol</th>
+                                <th>weight</th>
+                                <th>type</th>
+                                <th>miles</th>
+                                <th>load facility</th>
+
+                                <th>Eliminar</th>
+                                <th>Modificar</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <%if (data){%>
+                                <%=console.log(data.length);%>
+
+                                    <%for(var i=0;i < data.length;i++){ %>
+
+                                        <%let fechaMoment=(moment(data[i].date)); const dformat='YYYY-MM-DD' ; let
+                                            fechamiformato=fechaMoment.format(dformat);%>
+
+                                            <tr>
+                                                <!-- <td> <%= data[i].Id%></td> -->
+                                                <td>
+                                                    <%=(i+1)%>
+                                                </td>
+                                                <td>
+                                                    <%= data[i].week%>
+                                                </td>
+                                                <td>
+                                                    <%= data[i].username%>
+                                                </td>
+                                                <td>
+                                                    <%= fechamiformato%>
+                                                </td>
+                                                <td>
+                                                    <%= data[i].bol%>
+                                                </td>
+                                                <td>
+                                                    <%= data[i].weight%>
+                                                </td>
+                                                <td>
+                                                    <%= data[i].type%>
+                                                </td>
+                                                <td>
+                                                    <%= data[i].miles%>
+                                                </td>
+                                                <td>
+                                                    <%= data[i].load_facility%>
+                                                </td>
+
+                                                
+                                                    
+                                                <td> <a  href="/delete/<%=data[i].Id%>"
+                                                    class="btn btn-danger" >Eliminar</a> </td>
+                                                <td> <a href="/update/<%=data[i].Id%>"
+                                                        class="btn btn-info" >Actualizar</a> </td>
+
+
+
+                                            </tr>
+                                            <%}%>
+                                                <%}%>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+</body>
+<script type="text/javascript" src="/moment/min/moment.min.js"></script>
+
+
+</html>

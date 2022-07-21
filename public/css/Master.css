@@ -1,0 +1,97 @@
+.sidebar-toggled {
+    margin: 0;
+    padding: 100;
+    background-image: radial-gradient(grey  ,black);
+    /* background: url(../Img/fondo.jpg) no-repeat center top; */
+    background-size: cover; 
+    font-family: sans-serif;   
+    height: 100vh; 
+}
+.Registro-box
+{
+    width: 320px;
+    height: 440px;
+    background-color: #000;
+    border-radius: 1%;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing:  border-box;
+    padding: 70px 30px;
+
+}
+.Registro-box .avatar{
+    width: 300px;
+    height: 100px;
+    /* border-radius: 50%; */
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 150px);
+    
+
+}
+.Registro-box h1{
+    margin: 10   ;
+    padding: 40px;
+    text-align: center;
+    font-size: 22px;
+    
+    
+    }
+    
+    .Registro-box label{
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+        display: block;
+        }
+        .Registro-box input{
+            width: 100%;
+            margin-bottom: 20px;
+            
+            }
+            .Registro-box button{
+                width: 100%;
+                margin-bottom: 20px;
+                
+                }
+            .Registro-box input[type="text"],
+            .Registro-box input[type="password"],
+            .Registro-box input[type="email"]{
+            
+                border: none;
+                border-bottom: 1px solid #fff;
+                background: transparent;
+                outline:  none;
+                height: 40px;
+                color: #fff;
+                font-size: 16px;
+            }
+            .Registro-box button[type="submit"]{
+                border: none;
+                outline: none;
+         
+                height: 40px;
+                background-color: #b80f22;
+                color: #fff;
+                font-size: 18px;
+                border-radius: 20px;
+                }
+
+                .Registro-box button[type="submit"]:hover{
+     background-color: #fff;
+    color: #000;
+    }
+                .Registro-box a{
+                
+                    text-decoration: none;
+                    font-size: 12px;
+                    line-height: 20 px;
+                    color:darkgrey;
+                }
+                .Registro-box a:hover{
+                    color:#fff
+                    
+                    }
