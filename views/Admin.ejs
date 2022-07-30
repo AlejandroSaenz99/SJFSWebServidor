@@ -37,6 +37,7 @@
                             <option value="Luis@santajuliafs.com">Luis@santajuliafs.com</option>
                             <option value="Roman@santajuliafs.com">Roman@santajuliafs.com</option>
                             <option value="Guadalupe@santajuliafs.com">Guadalupe@santajuliafs.com</option>
+                            <option value="Fabian@santajuliafs.com">Fabiansantajuliafs.com</option>
                          
                   
                           </select>
@@ -46,6 +47,7 @@
 
                     </form>
                     <form action="/buscarTodo" method="post"><button type="submit">Todos los datos</button></form>
+                    <center> <h2>Viajes</h2></center>
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -117,6 +119,77 @@
                         </tbody>
                     </table>
 
+                    <center> <h2>Diesel</h2></center>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <!-- <th>id</th> -->
+                                <th># </th>
+                                <th>Week</th>
+                                <th>username</th>
+                                <th>Invoice</th>
+                                <th>Date</th>
+                                <th>Store</th>
+                                <th>Miles</th>
+                                <th>Gallons</th>
+                                <th>Amount</th>
+                                
+                              
+                                
+      
+                            </tr>
+                        </thead>
+                        <tbody>
+      
+                            <%if (data1){%>
+                                <%=console.log(data1.length);%>
+      
+                                    <%for(var i=0;i < data1.length;i++){ %>
+      
+                                        <%let fechaMoment=(moment(data1[i].date)); const dformat='YYYY-MM-DD' ; let
+                                            fechamiformato=fechaMoment.format(dformat);%>
+      
+                                            <tr>
+                                                <!-- <td> <%= data1[i].Id%></td> -->
+                                                <td>
+                                                  <%=(i+1)%>
+                                              </td>
+                                                <td>
+                                                    <%= data1[i].week%>
+                                                </td>
+                                                <td>
+                                                    <%= data1[i].username%>
+                                                </td>
+                                                <td>
+                                                  <%= data1[i].Invoice%>
+                                              </td>
+                                                <td>
+                                                    <%= fechamiformato%>
+                                                </td>
+                                               
+                                                <td>
+                                                    <%= data1[i].Store%>
+                                                </td>
+                                                <td>
+                                                    <%= data1[i].Miles%>
+                                                </td>
+                                                <td>
+                                                    <%= data1[i].Gallons%>
+                                                </td>
+                                                <td>
+                                                    <%= data1[i].Amount%>
+                                                </td>
+                                               
+                                                
+                                              
+      
+      
+                                            </tr>
+                                            <%}%>
+                                                <%}%>
+      
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 const controller = {};
 
 const bd = require('../public/db/conn');
-const moment=require('moment');
+const moment = require('moment');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 controller.index_GET = (req, res) => {
@@ -21,198 +21,280 @@ controller.register_GET = (req, res) => {
 }//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 controller.profile_GET = (req, res) => {
-console.log(req.user);
+    console.log(req.user);
     // res.render('Inicio.ejs', { user: req.user });
-usuario=req.user.username;
-    bd.query('SELECT * FROM viajes where username=?',[usuario], (err, viaje) => {
+    usuario = req.user.username;
+    bd.query('SELECT * FROM viajes where username=?', ["usuariooo"], (err, viaje) => {
         if (err) {
             res.json(err);
         }
-       
+
         res.render('Inicio.ejs', {
-           
-            user:req.user,
+
+            user: req.user,
             data: viaje,
-           moment: moment 
+            moment: moment
         });
 
     })
 
 }
 controller.Administrador = (req, res) => {//me manda a la pagina donde estan los usuarios
-    usuario=req.user.username;
-    bd.query('SELECT * FROM viajes where username=?',[usuario], (err, viaje) => {
+    usuario = req.user.username;
+    bd.query('SELECT * FROM viajes where username=?', [usuario], (err, viaje) => {
         if (err) {
             res.json(err);
         }
-       
+        bd.query('SELECT * FROM Diesel where username=?', [usuario], (err, Diesel) => {
+
         res.render('Admin.ejs', {
-   user:req.user,
+            user: req.user,
             data: viaje,
-           moment: moment 
+            data1: Diesel,
+            moment: moment
         });
 
-    })
+    }) })
 
 
 
 };
 controller.Consultas = (req, res) => {
     console.log(req.user);
-        res.render('Consultas.ejs', { user: req.user });
-    }
-
-controller.save = (req, res) => {//Aqui mandamos llamar al metodo guardar
-    semana=req.body.week;
-    usuario=req.user.username;
-    const data = req.body;
-    bd.query('INSERT INTO viajes set ?', [data], (err, viajes) => {
-        console.log(viajes);
-         
-        
-    })
-
-    bd.query('SELECT * FROM viajes where username=? and week=?',[usuario,semana], (err, viaje) => {
+    res.render('Consultas.ejs', { user: req.user });
+}
+controller.Diesel = (req, res) => {//me manda a la pagina donde estan los usuarios
+    usuario = req.user.username;
+    bd.query('SELECT * FROM Diesel where username=?', ["usuariooo"], (err, viaje) => {
         if (err) {
             res.json(err);
         }
-       
+
+        res.render('Diesel.ejs', {
+            user: req.user,
+            data1: viaje,
+            moment: moment
+        });
+
+    })
+
+
+
+};
+controller.save = (req, res) => {//Aqui mandamos llamar al metodo guardar
+    semana = req.body.week;
+    usuario = req.user.username;
+    const data = req.body;
+    bd.query('INSERT INTO viajes set ?', [data], (err, viajes) => {
+        console.log(viajes);
+        if (err) {
+
+            res.json("Viaje duplicado, porfavor verifique el BOL");
+        }
+
+    })
+
+    bd.query('SELECT * FROM viajes where username=? and week=?', [usuario, semana], (err, viaje) => {
+        if (err) {
+            res.json(err);
+        }
+
         res.render('Inicio.ejs', {
-            user:req.user,
+            user: req.user,
             data: viaje,
-           moment: moment 
+            moment: moment
+        });
+
+    })
+};
+controller.saveDiesel = (req, res) => {//Aqui mandamos llamar al metodo guardar
+    semana = req.body.week;
+    usuario = req.user.username;
+    const data1 = req.body;
+    bd.query('INSERT INTO Diesel set ?', [data1], (err, viajes) => {
+        console.log(viajes);
+        if (err) {
+
+            res.json("Invoice duplicado, porfavor verifique el invoice");
+        }
+
+    })
+
+    bd.query('SELECT * FROM Diesel where username=? and week=?', [usuario, semana], (err, Diesel) => {
+        if (err) {
+            res.json(err);
+        }
+
+        res.render('Diesel.ejs', {
+            user: req.user,
+            data1: Diesel,
+            moment: moment
         });
 
     })
 };
 controller.list2 = (req, res) => {//me manda a la pagina donde estan los usuarios
-    usuario=req.user.username;
-    bd.query('SELECT * FROM viajes where username=?',[usuario], (err, viaje) => {
+    usuario = req.user.username;
+    bd.query('SELECT * FROM viajes where username=?', ["usuariooo"], (err, viaje) => {
         if (err) {
             res.json(err);
         }
-       
+        bd.query('SELECT * FROM Diesel where username=?', ["usuariooo"], (err, Diesel) => {
         res.render('Consultas.ejs', {
-   user:req.user,
+            user: req.user,
             data: viaje,
-           moment: moment 
+            data1:Diesel,
+            moment: moment
         });
 
-    })
+    })})
 
 
 
 };
 
 controller.Delete = (req, res) => {
-    const idd=req.params.Id;
-    bd.query('Delete from viajes where Id=?',[idd],(err,rows)=>
-    res.redirect('/ver'));
- };
-
- controller.Edit=(req,res)=>{//Me consulta el id en la base de datos y me trae todos los datos
-    const idd=req.params.Id;
-bd.query('Select * from viajes where Id=?',[idd],(err,viajes)=>{
-    res.render('Modificar.ejs',{
-        data: viajes[0],
-        moment: moment 
-    });
-}
-);
+    const idd = req.params.Id;
+    bd.query('Delete from viajes where Id=?', [idd], (err, rows) =>
+        res.redirect('/ver'));
 };
-controller.Update=(req,res)=>{//me actualizsa
-    const idd=req.params.Id;
-    const newUsuario =req.body;
-    bd.query('UPDATE viajes set ? where Id=?',[newUsuario,idd],(err,usuarios)=>{
-res.redirect('/ver');
+controller.DeleteDiesel = (req, res) => {
+    const idd2 = req.params.Id;
+    bd.query('Delete from Diesel where Id=?', [idd2], (err, rows) =>
+        res.redirect('/ver'));
+};
+
+controller.Edit = (req, res) => {//Me consulta el id en la base de datos y me trae todos los datos
+    const idd = req.params.Id;
+    bd.query('Select * from viajes where Id=?', [idd], (err, viajes) => {
+        res.render('Modificar.ejs', {
+            data: viajes[0],
+            moment: moment
+        });
+    }
+    );
+};
+controller.EditDiesel = (req, res) => {//Me consulta el id en la base de datos y me trae todos los datos
+    const idd2 = req.params.Id;
+    bd.query('Select * from Diesel where Id=?', [idd2], (err, Diesel) => {
+        res.render('ModificarDiesel.ejs', {
+            data1: Diesel[0],
+            moment: moment
+        });
+    }
+    );
+};
+controller.UpdateDiesel = (req, res) => {//me actualizsa
+    const idd2 = req.params.Id;
+    const newUsuario2 = req.body;
+    bd.query('UPDATE Diesel set ? where Id=?', [newUsuario2, idd2], (err, usuarios) => {
+        res.redirect('/ver');
+
+    });
+};
+controller.Update = (req, res) => {//me actualizsa
+    const idd = req.params.Id;
+    const newUsuario = req.body;
+    bd.query('UPDATE viajes set ? where Id=?', [newUsuario, idd], (err, usuarios) => {
+        res.redirect('/ver');
 
     });
 };
 
 controller.buscar = (req, res) => {//me manda a la pagina donde estan los usuarios
-    semana=req.body.txtBuscar;
-    usuario=req.user.username;
-      bd.query('SELECT * FROM viajes where username=? and week=?',[usuario,semana], (err, viaje) => {
-          if (err) {
-              res.json(err);
-          }
-         
-          res.render('Consultas.ejs', {
-   user:req.user,
+    semana = req.body.txtBuscar;
+    usuario = req.user.username;
+    bd.query('SELECT * FROM viajes where username=? and week=?', [usuario, semana], (err, viaje) => {
+        if (err) {
+            res.json(err);
+        }
+        bd.query('SELECT * FROM Diesel where username=? and week=?', [usuario, semana], (err, Diesel) => {
+            if (err) {
+                res.json(err);
+            }
+            res.render('Consultas.ejs', {
+                user: req.user,
 
-              data: viaje,
-             moment: moment 
-          });
-  
-      })
-  
-  
-  };
-  controller.buscarEspecifico = (req, res) => {//me manda a la pagina donde estan los usuarios
-    semana=req.body.txtBuscar;
-    nombre=req.body.txtNombre;
-  
-      bd.query('SELECT * FROM viajes where username=? and week=?',[nombre,semana], (err, viaje) => {
-          if (err) {
-              res.json(err);
-          }
-         
-          res.render('Admin.ejs', {
-   user:req.user,
+                data: viaje, 
+                data1:Diesel,
+                moment: moment
+            });
+        })
+    })
 
-              data: viaje,
-             moment: moment 
-          });
-  
-      })
-  
-  
-  };
-  controller.buscarEnInicio = (req, res) => {//me manda a la pagina donde estan los usuarios
-   
-      bd.query('SELECT * FROM viajes where username=? and week=?',[usuario,semana], (err, viaje) => {
-          if (err) {
-              res.json(err);
-          }
-         
-          res.render('Inicio.ejs', {
-  
-              data: viaje,
-             moment: moment 
-          });
-  
-      })
-  
-  
-  
-  };
-  controller.buscarTodo = (req, res) => {//me manda a la pagina donde estan los usuarios
-    
-    usuario=req.user.username;console.log('el usuario es:', req.user.username);
-      bd.query('SELECT * FROM viajes where username=?',[usuario], (err, viaje) => {
-          if (err) {
-              res.json(err);
-          }
-         
-          res.render('Consultas.ejs', {
-   user:req.user,
 
-              data: viaje,
-             moment: moment 
-          });
-  
-      })
-  
-  
-  
-  };
 
-  controller.saveViaje = (req, res) => {//Aqui mandamos llamar al metodo guardar
- 
+};
+controller.buscarEspecifico = (req, res) => {//me manda a la pagina donde estan los usuarios
+    semana = req.body.txtBuscar;
+    nombre = req.body.txtNombre;
+
+    bd.query('SELECT * FROM viajes where username=? and week=?', [nombre, semana], (err, viaje) => {
+        if (err) {
+            res.json(err);
+        }
+        bd.query('SELECT * FROM Diesel where username=? and week=?', [nombre, semana], (err, Diesel) => {
+
+
+        res.render('Admin.ejs', {
+            user: req.user,
+
+            data: viaje,
+            data1: Diesel,
+            moment: moment
+        });
+
+    }) })
+
+
+};
+controller.buscarEnInicio = (req, res) => {//me manda a la pagina donde estan los usuarios
+
+    bd.query('SELECT * FROM viajes where username=? and week=?', [usuario, semana], (err, viaje) => {
+        if (err) {
+            res.json(err);
+        }
+
+        res.render('Inicio.ejs', {
+
+            data: viaje,
+            moment: moment
+        });
+
+    })
+
+
+
+};
+controller.buscarTodo = (req, res) => {//me manda a la pagina donde estan los usuarios
+
+    usuario = req.user.username; console.log('el usuario es:', req.user.username);
+    bd.query('SELECT * FROM viajes where username=?', [usuario], (err, viaje) => {
+        if (err) {
+            res.json(err);
+        }
+        bd.query('SELECT * FROM Diesel where username=?', [usuario], (err, Diesel) => {
+
+        res.render('Consultas.ejs', {
+            user: req.user,
+
+            data: viaje,
+            data1: Diesel,
+            moment: moment
+        });
+
+    }) })
+
+
+
+};
+
+controller.saveViaje = (req, res) => {//Aqui mandamos llamar al metodo guardar
+
     const data = req.body;
     bd.query('INSERT INTO cita set ?', [data], (err, cita) => {
         console.log(cita);
-         
+
         res.redirect('/profile');
     })
 };
@@ -356,7 +438,7 @@ controller.login_POST = (req, res) => {
 // controller.confirmBaja_POST = (req, res) => {
 
 //     values=req.body
-   
+
 
 //     async function waitForPromise() {
 //         let insertBaja = await functiondb.insertBaja(values);
