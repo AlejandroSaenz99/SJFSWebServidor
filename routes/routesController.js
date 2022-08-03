@@ -59,6 +59,66 @@ controller.Administrador = (req, res) => {//me manda a la pagina donde estan los
 
 
 };
+controller.RegistrarPago = (req, res) => {//me manda a la pagina donde estan los usuarios
+    usuario = req.user.username;
+    bd.query('SELECT * FROM Pagos where Estado=?', ["Pendiente"], (err, Tabla) => {
+        if (err) {
+            res.json(err);
+        }
+     
+
+        res.render('AñadirPago.ejs', {
+            user: req.user,
+            data: Tabla,
+           
+            moment: moment
+        });
+
+   })
+
+
+
+};
+controller.PagosPendientes = (req, res) => {//me manda a la pagina donde estan los Pagos pendientes
+    usuario = req.user.username;
+    bd.query('SELECT * FROM Pagos where Estado=?', ["Pendiente"], (err, Tabla) => {
+        if (err) {
+            res.json(err);
+        }
+     
+
+        res.render('PagosPen.ejs', {
+            user: req.user,
+            data: Tabla,
+           
+            moment: moment
+        });
+
+   })
+
+
+
+};
+controller.PagosRealizados = (req, res) => {//me manda a la pagina donde estan los Pagos pendientes
+    usuario = req.user.username;
+    bd.query('SELECT * FROM Pagos where Estado=?', ["Pagado"], (err, Tabla) => {
+        if (err) {
+            res.json(err);
+        }
+     
+
+        res.render('PagosRealizados.ejs', {
+            user: req.user,
+            data: Tabla,
+           
+            moment: moment
+        });
+
+   })
+
+
+
+};
 controller.Consultas = (req, res) => {
     console.log(req.user);
     res.render('Consultas.ejs', { user: req.user });
@@ -102,6 +162,33 @@ controller.save = (req, res) => {//Aqui mandamos llamar al metodo guardar
         res.render('Inicio.ejs', {
             user: req.user,
             data: viaje,
+            moment: moment
+        });
+
+    })
+};
+
+controller.GuardarPago = (req, res) => {//Aqui mandamos llamar al metodo guardar
+   
+    
+    const data = req.body;
+    bd.query('INSERT INTO Pagos set ?', [data], (err, Pagos) => {
+        console.log(Pagos);
+        if (err) {
+
+            res.json("Ha ocurrido un error");
+        }
+
+    })
+
+    bd.query('SELECT * FROM Pagos where Estado=? ', ["Pendiente"], (err, Pagos) => {
+        if (err) {
+            res.json(err);
+        }
+
+        res.render('AñadirPago.ejs', {
+            user: req.user,
+            data: Pagos,
             moment: moment
         });
 
@@ -163,6 +250,11 @@ controller.DeleteDiesel = (req, res) => {
     bd.query('Delete from Diesel where Id=?', [idd2], (err, rows) =>
         res.redirect('/ver'));
 };
+controller.DeletePago = (req, res) => {
+    const id = req.params.Id;
+    bd.query('Delete from Pagos where Id=?', [id], (err, rows) =>
+        res.redirect('/RegistrarPago'));
+};
 
 controller.Edit = (req, res) => {//Me consulta el id en la base de datos y me trae todos los datos
     const idd = req.params.Id;
@@ -181,6 +273,21 @@ controller.EditDiesel = (req, res) => {//Me consulta el id en la base de datos y
             data1: Diesel[0],
             moment: moment
         });
+    }
+    );
+};
+controller.EditPagos = (req, res) => {//Me consulta el id en la base de datos y me trae todos los datos
+    const idd2 = req.params.Id;
+    bd.query('Select * from Pagos where Id=?', [idd2], (err, Datos) => {
+
+        if(err){
+
+        } else
+        bd.query('UPDATE Pagos set Estado=? where Id=?', ["Pagado", idd2], (err, usuarios) => {
+            res.redirect('/PagosPendientes');
+    
+        });
+        
     }
     );
 };

@@ -22,53 +22,15 @@
 
 <body>
   <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand">SANTA JULIA FREIGHT SERVICES LLC  </a>
+    <a class="navbar-brand">Pagos  Pendientes </a>
    
   </nav>
-  <a >Periodo 33 (Miercoles 03 Julio- Martes 09 Agosto)
-  </a>
+  
 </body>
 <% include ./static/sidebar %>
   <div class="container">
     <container class="cuerpo">
-      <form action="/add"  method="post">
-        <br><br><br>
-        <h5>"Buen Inicio de Semana Vamos por esos 12 viajes!"</h5>
-        <style>
-         h5{
-font-family: cursive;
-color:cornflowerblue;
-text-shadow: 5px 5px 20px black;
-
-         }
-          
-          
-      </style>
-      <br>
-        <input type="text" id="Username" name="username" placeholder="" value="<%=user.username;%>" hidden><br><br>
-        <label for="semana">Week:</label><br>
-        <input type="number" id="week" name="week" placeholder="week"  required><br><br>
-        <label for="semana">Date:</label><br>
-        <input type="date" id="Fecha" name="date" placeholder="Date" value="" require><br><br>
-        <label for="semana">BOL:</label><br>
-        <input type="text" id="BOL" name="bol" placeholder="BOL" value="" required><br><br>
-        <label for="semana">Weigth:</label><br>
-        <input type="number" step="0.001" id="Peso" name="weight" placeholder="Weigth" value="" required><br><br>
-        <label for="tipo">Ton/Pound:</label><br>
-        <select name="type">
-          <option value="Ton">Ton</option>
-          <option value="Pound">Pound</option>
-
-        </select>
-        <br><br>
-        <label for="semana">Miles:</label><br>
-        <input type="number"step="0.001" id="Distancia" name="miles" placeholder="Miles" value="" required><br><br>
-        <label for="semana">Load Facility:</label><br>
-        <input type="text" id="Destino" name="load_facility" placeholder="Load Facility" value="" required><br><br>
-        <button type="submit" class="btn btn-primary">
-          Registrar Viaje
-        </button>
-      </form>
+    
     </container>
     <div class="container">
       <div class="row mt-5">
@@ -84,15 +46,13 @@ text-shadow: 5px 5px 20px black;
                   <thead>
                       <tr>
                           <!-- <th>id</th> -->
-                          <th># Trip</th>
-                          <th>Week</th>
-                          <th>username</th>
-                          <th>date</th>
-                          <th>bol</th>
-                          <th>weight</th>
-                          <th>type</th>
-                          <th>miles</th>
-                          <th>load facility</th>
+                          <th>#</th>
+                          <th>Descripcion</th>
+                          <th>Cantidad</th>
+                          <th>Fecha</th>
+                          <th>Estado</th>
+                          <th>Accion</th>
+                         
 
                         
 
@@ -114,30 +74,19 @@ text-shadow: 5px 5px 20px black;
                                             <%=(i+1)%>
                                         </td>
                                           <td>
-                                              <%= data[i].week%>
+                                              <%= data[i].Descripcion%>
                                           </td>
                                           <td>
-                                              <%= data[i].username%>
+                                              <%= data[i].Cantidad%>
                                           </td>
                                           <td>
                                               <%= fechamiformato%>
                                           </td>
                                           <td>
-                                              <%= data[i].bol%>
+                                              <%= data[i].Estado%>
                                           </td>
-                                          <td>
-                                              <%= data[i].weight%>
-                                          </td>
-                                          <td>
-                                              <%= data[i].type%>
-                                          </td>
-                                          <td>
-                                              <%= data[i].miles%>
-                                          </td>
-                                          <td>
-                                              <%= data[i].load_facility%>
-                                          </td>
-
+                                          <td> <a href="/updatePagos/<%=data[i].Id%>"
+                                            class="btn btn-info" >Pagar</a> </td>
                                           
                                         
 
