@@ -60,32 +60,32 @@
                   </thead>
                   <tbody>
 
-                      <%if (data){%>
-                          <%=console.log(data.length);%>
+                      <%if (PagoDatos){%>
+                          <%=console.log(PagoDatos.length);%>
 
-                              <%for(var i=0;i < data.length;i++){ %>
+                              <%for(var i=0;i < PagoDatos.length;i++){ %>
 
-                                  <%let fechaMoment=(moment(data[i].date)); const dformat='YYYY-MM-DD' ; let
+                                  <%let fechaMoment=(moment(PagoDatos[i].Fecha_Limite)); const dformat='YYYY-MM-DD' ; let
                                       fechamiformato=fechaMoment.format(dformat);%>
 
                                       <tr>
-                                          <!-- <td> <%= data[i].Id%></td> -->
+                                          <!-- <td> <%= PagoDatos[i].Id%></td> -->
                                           <td>
                                             <%=(i+1)%>
                                         </td>
                                           <td>
-                                              <%= data[i].Descripcion%>
+                                              <%= PagoDatos[i].Descripcion%>
                                           </td>
                                           <td>
-                                              <%= data[i].Cantidad%>
+                                              <%= PagoDatos[i].Cantidad%>
                                           </td>
                                           <td>
                                               <%= fechamiformato%>
                                           </td>
                                           <td>
-                                              <%= data[i].Estado%>
+                                              <%= PagoDatos[i].Estado%>
                                           </td>
-                                          <td> <a href="/updatePagos/<%=data[i].Id%>"
+                                          <td> <a href="/updatePagos/<%=PagoDatos[i].Id%>"
                                             class="btn btn-info" >Pagar</a> </td>
                                           
                                         

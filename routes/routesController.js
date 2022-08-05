@@ -69,7 +69,7 @@ controller.RegistrarPago = (req, res) => {//me manda a la pagina donde estan los
 
         res.render('AñadirPago.ejs', {
             user: req.user,
-            data: Tabla,
+            PagoDatos: Tabla,
            
             moment: moment
         });
@@ -89,7 +89,7 @@ controller.PagosPendientes = (req, res) => {//me manda a la pagina donde estan l
 
         res.render('PagosPen.ejs', {
             user: req.user,
-            data: Tabla,
+            PagoDatos: Tabla,
            
             moment: moment
         });
@@ -109,7 +109,7 @@ controller.PagosRealizados = (req, res) => {//me manda a la pagina donde estan l
 
         res.render('PagosRealizados.ejs', {
             user: req.user,
-            data: Tabla,
+            PagoDatos: Tabla,
            
             moment: moment
         });
@@ -171,8 +171,8 @@ controller.save = (req, res) => {//Aqui mandamos llamar al metodo guardar
 controller.GuardarPago = (req, res) => {//Aqui mandamos llamar al metodo guardar
    
     
-    const data = req.body;
-    bd.query('INSERT INTO Pagos set ?', [data], (err, Pagos) => {
+    const PagoDatos = req.body;
+    bd.query('INSERT INTO Pagos set ?', [PagoDatos], (err, Pagos) => {
         console.log(Pagos);
         if (err) {
 
@@ -188,7 +188,7 @@ controller.GuardarPago = (req, res) => {//Aqui mandamos llamar al metodo guardar
 
         res.render('AñadirPago.ejs', {
             user: req.user,
-            data: Pagos,
+            PagoDatos: Pagos,
             moment: moment
         });
 

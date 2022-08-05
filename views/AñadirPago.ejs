@@ -38,7 +38,7 @@
         <input type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion" value=""  required><br><br>
         <label for="Cantidad">Cantidad:</label><br>
         <input type="number"  step="0.001" id="Cantidad" name="Cantidad" placeholder="Cantidad"  required><br><br>
-        <label for="FEcha">Fecha de pago:</label><br>
+        <label for="Fecha">Fecha de pago:</label><br>
         <input type="date" id="Fecha" name="Fecha_Limite" placeholder="Fecha" value="" require><br><br>
         
         <input type="text" id="Estado" name="Estado" placeholder="Estado" value="Pendiente" hidden><br><br>
@@ -75,33 +75,33 @@
                   </thead>
                   <tbody>
 
-                      <%if (data){%>
-                          <%=console.log(data.length);%>
+                      <%if (PagoDatos){%>
+                          <%=console.log(PagoDatos.length);%>
 
-                              <%for(var i=0;i < data.length;i++){ %>
+                              <%for(var i=0;i < PagoDatos.length;i++){ %>
 
-                                  <%let fechaMoment=(moment(data[i].date)); const dformat='YYYY-MM-DD' ; let
+                                  <%let fechaMoment=(moment(PagoDatos[i].date)); const dformat='YYYY-MM-DD' ; let
                                       fechamiformato=fechaMoment.format(dformat);%>
 
                                       <tr>
-                                          <!-- <td> <%= data[i].Id%></td> -->
+                                          <!-- <td> <%= PagoDatos[i].Id%></td> -->
                                           <td>
                                             <%=(i+1)%>
                                         </td>
                                           <td>
-                                              <%= data[i].Descripcion%>
+                                              <%= PagoDatos[i].Descripcion%>
                                           </td>
                                           <td>
-                                              <%= data[i].Cantidad%>
+                                              <%= PagoDatos[i].Cantidad%>
                                           </td>
                                           <td>
                                               <%= fechamiformato%>
                                           </td>
                                           <td>
-                                              <%= data[i].Estado%>
+                                              <%= PagoDatos[i].Estado%>
                                           </td>
                                          
-                                          <td> <a  href="/DeletePago/<%=data[i].Id%>"
+                                          <td> <a  href="/DeletePago/<%=PagoDatos[i].Id%>"
                                             class="btn btn-danger" >Eliminar</a> </td>
                                           
                                         
