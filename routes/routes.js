@@ -13,6 +13,7 @@ router.get('/profile',middleware.isLoggedIn, routesController.profile_GET);
 router.get('/Diesel',middleware.isLoggedIn, routesController.Diesel);
 router.get('/consultas',middleware.isLoggedIn, routesController.Consultas);
 router.get('/admin',middleware.isLoggedIn, routesController.Administrador);
+router.get('/Inversionista',middleware.isLoggedIn, routesController.Dueño);
 router.get('/RegistrarPago',middleware.isLoggedIn, routesController.RegistrarPago);
 router.get('/PagosPendientes',middleware.isLoggedIn, routesController.PagosPendientes);
 router.get('/PagosRealizados',middleware.isLoggedIn, routesController.PagosRealizados);
@@ -30,6 +31,7 @@ router.post('/update/:Id',middleware.isLoggedIn,routesController.Update);
 router.post('/updateDiesel/:Id',middleware.isLoggedIn,routesController.UpdateDiesel);
  router.post('/buscar',middleware.isLoggedIn,routesController.buscar);
  router.post('/buscarEspecifico',middleware.isLoggedIn,routesController.buscarEspecifico);
+ router.post('/Search',middleware.isLoggedIn,routesController.Search);
  router.post('/buscarTodo',middleware.isLoggedIn,routesController.buscarTodo);
  router.post('/addViaje',middleware.isLoggedIn,routesController.saveViaje);
 

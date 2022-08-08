@@ -31,13 +31,16 @@
             <div class="row mt-5">
                 <div class="col-md-12">
                     <br><br>
-                    <form action="/buscarEspecifico" method="post"> 
-                        <select name="txtNombre">
-                            <option value="">Driver</option>
-                            <option value="Luis@santajuliafs.com">Luis@santajuliafs.com</option>
-                            <option value="Roman@santajuliafs.com">Roman@santajuliafs.com</option>
-                            <option value="Guadalupe@santajuliafs.com">Guadalupe@santajuliafs.com</option>
-                            <option value="Fabian@santajuliafs.com">Fabiansantajuliafs.com</option>
+                    <form action="/Search" method="post"> 
+                        <select name="txtCamion">
+                            <option value="99999">Camion</option>
+                            <% if(user.Tipo ==='Dueño'){%>
+                                <% if(user.Camion == 808){%>
+                                    <option value="808">808</option>
+                                    <%}%>
+                                <%}%>
+                            
+                          
                          
                   
                           </select>
@@ -46,7 +49,6 @@
                         <button type="submit">Buscar</button>
 
                     </form>
-                    <form action="/buscarTodo" method="post"><button type="submit">Todos los datos</button></form>
                     <center> <h2>Viajes</h2></center>
                     <table class="table table-bordered table-hover">
                         <thead>

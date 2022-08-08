@@ -24,11 +24,15 @@ controller.profile_GET = (req, res) => {
     console.log(req.user);
     // res.render('Inicio.ejs', { user: req.user });
     usuario = req.user.username;
+    tipo= req.user.Tipo;
     bd.query('SELECT * FROM viajes where username=?', ["usuariooo"], (err, viaje) => {
         if (err) {
             res.json(err);
         }
+if(tipo=='Dueño'){
+    res.redirect('/Inversionista');
 
+}else{
         res.render('Inicio.ejs', {
 
             user: req.user,
@@ -36,7 +40,7 @@ controller.profile_GET = (req, res) => {
             moment: moment
         });
 
-    })
+    }})
 
 }
 controller.Administrador = (req, res) => {//me manda a la pagina donde estan los usuarios
@@ -55,9 +59,24 @@ controller.Administrador = (req, res) => {//me manda a la pagina donde estan los
         });
 
     }) })
+};
+controller.Dueño = (req, res) => {//me manda a la pagina donde estan los usuarios
+    usuario = req.user.username;
+    Camion = req.user.Camion;
+    bd.query('SELECT * FROM viajes where Truck=?', [99999], (err, viaje) => {
+        if (err) {
+            res.json(err);
+        }
+        bd.query('SELECT * FROM Diesel where Truck=?', [999999], (err, Diesel) => {
 
+        res.render('Dueño.ejs', {
+            user: req.user,
+            data: viaje,
+            data1: Diesel,
+            moment: moment
+        });
 
-
+    }) })
 };
 controller.RegistrarPago = (req, res) => {//me manda a la pagina donde estan los usuarios
     usuario = req.user.username;
@@ -344,6 +363,29 @@ controller.buscarEspecifico = (req, res) => {//me manda a la pagina donde estan 
 
 
         res.render('Admin.ejs', {
+            user: req.user,
+
+            data: viaje,
+            data1: Diesel,
+            moment: moment
+        });
+
+    }) })
+
+
+};
+controller.Search = (req, res) => {//me manda a la pagina donde estan los usuarios
+    semana = req.body.txtBuscar;
+    Camion = req.body.txtCamion;
+
+    bd.query('SELECT * FROM viajes where Truck=? and week=?', [Camion, semana], (err, viaje) => {
+        if (err) {
+            res.json(err);
+        }
+        bd.query('SELECT * FROM Diesel where Truck=? and week=?', [Camion, semana], (err, Diesel) => {
+
+
+        res.render('Dueño.ejs', {
             user: req.user,
 
             data: viaje,

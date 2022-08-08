@@ -44,6 +44,8 @@
         <input type="text" id="Username" name="username" placeholder="" value="<%=user.username;%>" hidden><br><br>
         <label for="Invoice">Invoice:</label><br>
         <input type="text" id="Invoice" name="Invoice" placeholder="Invoice" value="" required><br><br>
+        <label for="Invoice">Truck:</label><br>
+        <input type="number" id="Truck" name="Truck" placeholder="Truck" value="" required><br><br>
         <label for="Fecha">Date:</label><br>
         <input type="date" id="Fecha" name="Date" placeholder="Date" value="" require><br><br>
         <label for="Tienda">Store:</label><br>
@@ -77,6 +79,7 @@
                       <tr>
                           <!-- <th>id</th> -->
                           <th># </th>
+                          <th>Truck</th>
                           <th>Week</th>
                           <th>username</th>
                           <th>Invoice</th>
@@ -104,9 +107,11 @@
                                           <td>
                                             <%=(i+1)%>
                                         </td>
-                                          <td>
-                                              <%= data1[i].week%>
-                                          </td>
+                                        <td>
+                                          <%= data1[i].Truck%>
+                                      </td> <td>
+                                        <%= data1[i].week%>
+                                    </td>
                                           <td>
                                               <%= data1[i].username%>
                                           </td>

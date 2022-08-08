@@ -43,6 +43,7 @@
                             <tr>
                                 <!-- <th>id</th> -->
                                 <th># Trip</th>
+                                <th>Truck</th>
                                 <th>Week</th>
                                 <th>username</th>
                                 <th>date</th>
@@ -73,6 +74,8 @@
                                                     <%=(i+1)%>
                                                 </td>
                                                 <td>
+                                                    <%= data[i].Truck%>
+                                                </td> <td>
                                                     <%= data[i].week%>
                                                 </td>
                                                 <td>
@@ -121,6 +124,7 @@
                             <tr>
                                 <!-- <th>id</th> -->
                                 <th># </th>
+                                <th>Truck</th>
                                 <th>Week</th>
                                 <th>username</th>
                                 <th>Invoice</th>
@@ -151,9 +155,12 @@
                                                 <td>
                                                   <%=(i+1)%>
                                               </td>
-                                                <td>
-                                                    <%= data1[i].week%>
-                                                </td>
+                                              <td>
+                                                <%= data1[i].Truck%>
+                                            </td>
+                                            <td>
+                                                <%= data1[i].week%>
+                                            </td>
                                                 <td>
                                                     <%= data1[i].username%>
                                                 </td>

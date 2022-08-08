@@ -46,6 +46,8 @@ text-shadow: 5px 5px 20px black;
       </style>
       <br>
         <input type="text" id="Username" name="username" placeholder="" value="<%=user.username;%>" hidden><br><br>
+        <label for="Truck">Truck:</label><br>
+        <input type="number" id="Truck" name="Truck" placeholder="Truck"  required><br><br>
         <label for="semana">Week:</label><br>
         <input type="number" id="week" name="week" placeholder="week"  required><br><br>
         <label for="semana">Date:</label><br>
@@ -88,6 +90,7 @@ text-shadow: 5px 5px 20px black;
                       <tr>
                           <!-- <th>id</th> -->
                           <th># Trip</th>
+                          <th>Truck</th>
                           <th>Week</th>
                           <th>username</th>
                           <th>date</th>
@@ -117,9 +120,11 @@ text-shadow: 5px 5px 20px black;
                                           <td>
                                             <%=(i+1)%>
                                         </td>
-                                          <td>
-                                              <%= data[i].week%>
-                                          </td>
+                                        <td>
+                                          <%= data[i].Truck%>
+                                      </td> <td>
+                                        <%= data[i].week%>
+                                    </td>
                                           <td>
                                               <%= data[i].username%>
                                           </td>

@@ -8,18 +8,25 @@
         <li>
             <img src="./img/logo.jpeg" alt="Logotipo" class="logo" >
         </li>
-        
-        <li> <a href="/profile">Viajes</a></li>
-        <li> <a href="/Diesel">Diesel</a></li>
-        <li> <a href="/ver">Consultar</a></li>
+        <% if(user.Tipo ==='Dueño'){%>
+            <li> <a href="/ver">Consultar</a></li>
+            <%}%>
+            <% if(user.Tipo ==='Driver'){%>
+            <li> <a href="/profile">Viajes</a></li>
+            <li> <a href="/Diesel">Diesel</a></li>
+            <li> <a href="/ver">Consultar</a></li>
+            <%}%>
         <%console.log(user.Tipo);
         if(user.Tipo ==='Admin'){%>
+            <li> <a href="/profile">Viajes</a></li>
+            <li> <a href="/Diesel">Diesel</a></li>
+            <li> <a href="/ver">Consultar</a></li>
             <li > <a href="/admin">Administrador</a></li>
             <li > <a href="/RegistrarPago">Añadir Pago</a></li>
             <li > <a href="/PagosPendientes">Pagos Pendientes</a></li>
             <li > <a href="/PagosRealizados">Pagos Realizados</a></li>
+            
             <%}%>
-          
         <li> <a href="/logout">Cerrar sesion</a></li>
           
       
